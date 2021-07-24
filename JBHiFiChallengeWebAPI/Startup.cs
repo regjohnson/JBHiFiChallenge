@@ -1,3 +1,5 @@
+using JBHiFiChallengeWebAPI.ServiceContracts;
+using JBHiFiChallengeWebAPI.ServiceImplementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,9 @@ namespace JBHiFiChallengeWebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JBHiFiChallengeWebAPI", Version = "v1" });
             });
+
+            services.AddScoped<IRateLimitService, RateLimitService>();
+            services.AddScoped<IWeatherMapService, WeatherMapServiceInMemory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

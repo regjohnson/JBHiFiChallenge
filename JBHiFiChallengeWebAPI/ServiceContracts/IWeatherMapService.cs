@@ -1,4 +1,6 @@
 ﻿using JBHiFiChallengeWebAPI.Entities;
+using JBHiFiChallengeWebAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +11,7 @@ namespace JBHiFiChallengeWebAPI.ServiceContracts
 {
     public interface IWeatherMapService
     {
-        bool CheckRateLimit(string keyName);
+        ApiErrorResult ValidateInputs(string cityName, string countryName, string keyName);
+        Task GetMapDataAsync(string cityName, string countryName);
     }
 }

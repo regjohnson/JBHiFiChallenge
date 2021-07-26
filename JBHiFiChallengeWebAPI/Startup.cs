@@ -1,3 +1,4 @@
+using JBHiFiChallengeWebAPI.Helpers;
 using JBHiFiChallengeWebAPI.ServiceContracts;
 using JBHiFiChallengeWebAPI.ServiceImplementations;
 using Microsoft.AspNetCore.Builder;
@@ -18,9 +19,19 @@ namespace JBHiFiChallengeWebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var configPath = $"Config/";
+            string envName = env.EnvironmentName;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile($"{configPath}appsettings.{envName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            AppDefs.AppSettings.OpenWeatherMapApiKey = appSettingsSection.GetValue<string>("OpenWeatherMapApiKey");
         }
 
         public IConfiguration Configuration { get; }
@@ -28,15 +39,17 @@ namespace JBHiFiChallengeWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JBHiFiChallengeWebAPI", Version = "v1" });
+                c.OperationFilter<Swagger.AddRequiredHeaderParameter>();
             });
 
             services.AddScoped<IRateLimitService, RateLimitService>();
-            services.AddScoped<IWeatherMapService, WeatherMapServiceInMemory>();
+            services.AddScoped<IRateLimitCheckService, RateLimitCheckServiceInMemory>();
+            services.AddScoped<IWeatherMapService, WeatherMapService>();
+            services.AddScoped<IWebCallService, WebCallService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

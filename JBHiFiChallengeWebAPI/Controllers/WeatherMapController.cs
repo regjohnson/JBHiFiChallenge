@@ -16,26 +16,31 @@ namespace JBHiFiChallengeWebAPI.Controllers
     public class WeatherMapController : ControllerBase
     {
         IWeatherMapService weatherMapService;
+        IRateLimitCheckService rateLimitCheckService;
 
-        public WeatherMapController(IWeatherMapService _weatherMapService)
+        public WeatherMapController(IWeatherMapService _weatherMapService, IRateLimitCheckService _rateLimitCheckService)
         {
             this.weatherMapService = _weatherMapService;
+            this.rateLimitCheckService = _rateLimitCheckService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get(string cityName, string countryName)
         {
-            await Task.Delay(0);
+            string keyName = Request.Headers["keyName"];
+            ApiErrorResult invalidInput = weatherMapService.ValidateInputs(cityName, countryName, keyName);
+            if (invalidInput != null)
+            {
+                return StatusCode(invalidInput.ErrorStatusCode, invalidInput.ErrorMessage);
+            }
 
-            if (string.IsNullOrWhiteSpace(cityName))
-                return BadRequest("City name was not provided");
-
-            if (string.IsNullOrWhiteSpace(cityName))
-                return BadRequest("Country Name was not provided");
-
-            bool rateLimitOk = weatherMapService.CheckRateLimit("key1");
+            bool rateLimitOk = rateLimitCheckService.CheckRateLimit(keyName);
             if (!rateLimitOk)
+            {
                 return StatusCode(422, "Too many requests");
+            }
+
+            await weatherMapService.GetMapDataAsync(cityName, countryName);
 
             List<WeatherMapResult> data = new List<WeatherMapResult>();
             ApiActionResult apiResult = new ApiActionResult(data);

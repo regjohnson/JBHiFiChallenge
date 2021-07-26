@@ -1,17 +1,17 @@
 ﻿using JBHiFiChallengeWebAPI.Entities;
-using JBHiFiChallengeWebAPI.ServiceContracts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JBHiFiChallengeWebAPI.ServiceImplementations
+namespace JBHiFiChallengeWebAPI.ServiceContracts
 {
-    public class WeatherMapServiceInMemory : IWeatherMapService
+    public class RateLimitCheckServiceInMemory : IRateLimitCheckService
     {
         IRateLimitService rateLimitService;
-        public WeatherMapServiceInMemory(IRateLimitService _rateLimitService)
+
+        public RateLimitCheckServiceInMemory(IRateLimitService _rateLimitService)
         {
             this.rateLimitService = _rateLimitService;
         }

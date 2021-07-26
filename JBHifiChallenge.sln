@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFiChallengeWebAPI", "JBHiFiChallengeWebAPI\JBHiFiChallengeWebAPI.csproj", "{87CADE78-CF4A-446A-99B6-89ED51B375A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFiChallengeWebAPI", "JBHiFiChallengeWebAPI\JBHiFiChallengeWebAPI.csproj", "{87CADE78-CF4A-446A-99B6-89ED51B375A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFiChallengeWebAPI.Tests", "JBHiFiChallengeWebAPI.Tests\JBHiFiChallengeWebAPI.Tests.csproj", "{78571790-FA74-4F87-93F0-EF4BA873A131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFiChallengeWebAPI.Tests", "JBHiFiChallengeWebAPI.Tests\JBHiFiChallengeWebAPI.Tests.csproj", "{78571790-FA74-4F87-93F0-EF4BA873A131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFiChallengeWebUI", "JBHiFiChallengeWebUI\JBHiFiChallengeWebUI.csproj", "{01E8FFA5-A005-42E4-B84E-31DD41CD41DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{78571790-FA74-4F87-93F0-EF4BA873A131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78571790-FA74-4F87-93F0-EF4BA873A131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78571790-FA74-4F87-93F0-EF4BA873A131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E8FFA5-A005-42E4-B84E-31DD41CD41DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E8FFA5-A005-42E4-B84E-31DD41CD41DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E8FFA5-A005-42E4-B84E-31DD41CD41DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E8FFA5-A005-42E4-B84E-31DD41CD41DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

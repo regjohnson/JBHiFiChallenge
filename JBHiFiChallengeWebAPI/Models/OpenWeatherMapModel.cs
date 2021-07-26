@@ -7,6 +7,11 @@ namespace JBHiFiChallengeWebAPI.Models
 {
     public class OpenWeatherMapModel
     {
-        
+        public List<Weather> Weather { get; set; }
+    }
+
+    public class Weather
+    {
+        public string Description { get; set; }
     }
 }

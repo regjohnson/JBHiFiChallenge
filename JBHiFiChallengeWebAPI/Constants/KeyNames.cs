@@ -7,6 +7,6 @@ namespace JBHiFiChallengeWebAPI.Constants
 {
     public static class KeyNames
     {
-        public static List<string> Keys = new List<string>() { "Key1", "Key2", "Key3", "Key4", "Key5" };
+        public static HashSet<string> Keys = new HashSet<string>() { "Key1", "Key2", "Key3", "Key4", "Key5" };
     }
 }

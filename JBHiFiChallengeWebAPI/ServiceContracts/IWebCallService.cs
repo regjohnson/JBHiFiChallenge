@@ -8,6 +8,6 @@ namespace JBHiFiChallengeWebAPI.ServiceContracts
 {
     public interface IWebCallService
     {
-        public Task<WebCallResult<List<OpenWeatherMapModel>>> GetOpenWeatherMapDataAsync(string cityName, string countryName);
+        public Task<WebCallResult<OpenWeatherMapModel>> GetOpenWeatherMapDataAsync(string cityName, string countryName);
     }
 }

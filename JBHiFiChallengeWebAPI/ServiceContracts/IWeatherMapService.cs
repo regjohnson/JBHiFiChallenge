@@ -12,6 +12,6 @@ namespace JBHiFiChallengeWebAPI.ServiceContracts
     public interface IWeatherMapService
     {
         ApiErrorResult ValidateInputs(string cityName, string countryName, string keyName);
-        Task GetMapDataAsync(string cityName, string countryName);
+        Task<string> GetWeatherMapDataAsync(string cityName, string countryName);
     }
 }

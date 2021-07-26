@@ -40,10 +40,9 @@ namespace JBHiFiChallengeWebAPI.Controllers
                 return StatusCode(422, "Too many requests");
             }
 
-            await weatherMapService.GetMapDataAsync(cityName, countryName);
+            string weatherMapDescription = await weatherMapService.GetWeatherMapDataAsync(cityName, countryName);
 
-            List<WeatherMapResult> data = new List<WeatherMapResult>();
-            ApiActionResult apiResult = new ApiActionResult(data);
+            ApiActionResult apiResult = new ApiActionResult(weatherMapDescription);
             return Ok(apiResult);
         }
     }

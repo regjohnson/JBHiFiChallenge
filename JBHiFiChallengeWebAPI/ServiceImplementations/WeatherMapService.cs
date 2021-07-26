@@ -29,12 +29,27 @@ namespace JBHiFiChallengeWebAPI.ServiceImplementations
             if (string.IsNullOrWhiteSpace(keyName))
                 return new ApiErrorResult(HttpStatusCode.BadRequest, "Key name was not sent in header");
 
+            if (!Constants.KeyNames.Keys.Contains(keyName))
+                return new ApiErrorResult(HttpStatusCode.BadRequest, "Invalid Key name was sent");
+
             return null;
         }
 
-        public async Task GetMapDataAsync(string cityName, string countryName)
+        public async Task<string> GetWeatherMapDataAsync(string cityName, string countryName)
         {
-            var result = await this.webCallService.GetOpenWeatherMapDataAsync(cityName, countryName);
+            try
+            {
+                var apiResult = await this.webCallService.GetOpenWeatherMapDataAsync(cityName, countryName);
+                var weatherItem = apiResult.Data?.Weather.FirstOrDefault();
+
+                string weatherDescription = weatherItem?.Description ?? "No weather description was avaiable";
+                return weatherDescription;
+            }
+            catch (Exception ex)
+            {
+                string errMsg = $"Error retrieving weather ({ex.Message})";
+                return errMsg;
+            }
         }
     }
 }

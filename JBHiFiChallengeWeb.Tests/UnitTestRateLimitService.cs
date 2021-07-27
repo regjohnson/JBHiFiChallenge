@@ -6,7 +6,7 @@ using JBHiFiChallengeWebAPI.ServiceContracts;
 using JBHiFiChallengeWebAPI.ServiceImplementations;
 using Xunit;
 
-namespace JBHiFiChallengeWebAPI.Tests
+namespace JBHiFiChallengeWeb.Tests
 {
     public class UnitTestRateLimitService
     {

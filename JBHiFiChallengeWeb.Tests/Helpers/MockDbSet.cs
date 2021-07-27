@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace JBHiFiChallengeWebAPI.Tests.Helpers
+namespace JBHiFiChallengeWeb.Tests.Helpers
 {
     public static class MockDbSet
     {

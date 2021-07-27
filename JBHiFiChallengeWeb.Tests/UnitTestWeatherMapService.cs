@@ -9,7 +9,7 @@ using JBHiFiChallengeWebAPI.ServiceImplementations;
 using Moq;
 using Xunit;
 
-namespace JBHiFiChallengeWebAPI.Tests
+namespace JBHiFiChallengeWeb.Tests
 {
     public class UnitTestWeatherMapService
     {

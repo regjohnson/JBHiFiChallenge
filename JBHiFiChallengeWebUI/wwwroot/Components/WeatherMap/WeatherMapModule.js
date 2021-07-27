@@ -11,11 +11,7 @@
     }
 
     var retrieve = function (city, country, keyName) {
-        if (keyName == '') {
-            keyName = 'Key1';
-        }
-
-        var dest = 'https://localhost:44374/' + 'WeatherMap';
+        var dest = GetWebApiPath() + 'WeatherMap';
 
         dest += '?cityName=' + encodeURIComponent(city) + '&countryName=' + encodeURIComponent(country);
 
@@ -41,6 +37,10 @@
             },
             error: function (result, status, jqXHR) {
                 var responseText = result.responseText;
+                if (responseText == '') {
+                    responseText = 'Could not retrieve weather info from api';
+                }
+
                 $('#searchResult').html(responseText);
             },
             complete: function () {

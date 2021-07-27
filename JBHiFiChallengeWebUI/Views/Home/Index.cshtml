@@ -1,7 +1,7 @@
 ﻿<div>
     <div>City Name: </div><input id="txtCity" type="text" />
     <div style="padding-top: 10px">Country Name: </div><input id="txtCountry" type="text" />
-    <div style="padding-top: 10px">Key Name: </div><input id="txtKeyName" type="text" />
+    <div style="padding-top: 10px">Key Name: </div><input id="txtKeyName" type="text" value="Key1" />
 
     <div style="padding-top: 25px">
         <button id="btnSearch">Get Weather</button>
@@ -17,5 +17,9 @@
         $(document).ready(function () {
             WeatherMapModule.Init();
         });
+
+        function GetWebApiPath() {
+            return '@JBHiFiChallengeWebUI.Helpers.AppDefs.AppSettings.AppApiUrl';
+        }
     </script>
 }

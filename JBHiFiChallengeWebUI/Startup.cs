@@ -1,3 +1,4 @@
+using JBHiFiChallengeWebUI.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,9 +14,19 @@ namespace JBHiFiChallengeWebUI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var configPath = $"Config/";
+            string envName = env.EnvironmentName;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile($"{configPath}appsettings.{envName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            AppDefs.AppSettings.AppApiUrl = appSettingsSection.GetValue<string>("AppApiUrl");
         }
 
         public IConfiguration Configuration { get; }

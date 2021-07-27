@@ -41,9 +41,20 @@ namespace JBHiFiChallengeWebAPI.ServiceImplementations
             {
                 var apiResult = await this.webCallService.GetOpenWeatherMapDataAsync(cityName, countryName);
                 var weatherItem = apiResult.Data?.Weather.FirstOrDefault();
+                if (weatherItem != null)
+                {
+                    string weatherDescription = weatherItem?.Description ?? "No weather description was avaiable";
+                    return weatherDescription;
+                }
 
-                string weatherDescription = weatherItem?.Description ?? "No weather description was avaiable";
-                return weatherDescription;
+                if (apiResult.ErrorMessage != null)
+                {
+                    return apiResult.ErrorMessage;
+                }
+                else
+                {
+                    return "Could not retrieve weather from Open Weather Map api";
+                }
             }
             catch (Exception ex)
             {

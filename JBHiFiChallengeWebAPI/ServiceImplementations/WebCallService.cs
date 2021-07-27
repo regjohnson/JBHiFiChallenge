@@ -28,13 +28,21 @@ namespace JBHiFiChallengeWebAPI.ServiceImplementations
                 using (HttpResponseMessage response = await httpClient.GetAsync(url))
                 {
                     string apiContent = await response.Content.ReadAsStringAsync();
-
                     int statusCode = (int)response.StatusCode;
-                    var apiResult = Newtonsoft.Json.JsonConvert.DeserializeObject<OpenWeatherMapModel>(apiContent);
 
-                    var result = new WebCallResult<OpenWeatherMapModel>();
+                    WebCallResult<OpenWeatherMapModel> result = new WebCallResult<OpenWeatherMapModel>();
                     result.StatusCode = statusCode;
-                    result.Data = apiResult;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var apiResult = Newtonsoft.Json.JsonConvert.DeserializeObject<OpenWeatherMapModel>(apiContent);
+                        result.Data = apiResult;
+                    }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        var apiResult = Newtonsoft.Json.JsonConvert.DeserializeObject<OpenWeatherMapErrorModel>(apiContent);
+                        result.ErrorMessage = apiResult.Message;
+                    }
 
                     return result;
                 }

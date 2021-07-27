@@ -14,4 +14,9 @@ namespace JBHiFiChallengeWebAPI.Models
     {
         public string Description { get; set; }
     }
+
+    public class OpenWeatherMapErrorModel
+    {
+        public string Message { get; set; }
+    }
 }

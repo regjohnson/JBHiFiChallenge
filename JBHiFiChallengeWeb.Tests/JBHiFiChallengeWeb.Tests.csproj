@@ -25,4 +25,8 @@
     <ProjectReference Include="..\JBHiFiChallengeWebAPI\JBHiFiChallengeWebAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UITests\" />
+  </ItemGroup>
+
 </Project>
